@@ -28,9 +28,11 @@
 以下のようなディレクトリ構成を想定しています。
 
 ```
-- controllers/ : apiのコントローラーのディレクトリです。
-- models/      : apiのモデルのディレクトリです。
-- routes/      : apiのルートのディレクトリです。
+- server
+  - index.ts    : React, Next.js, Express,
+  - controllers/ : apiのコントローラーのディレクトリです。
+  - models/      : apiのモデルのディレクトリです。
+  - routes/      : apiのルートのディレクトリです。
 - modules/     : Redux関連モジュールが格納されています。
 - containers/  : Reduxと連携するReactコンポーネントが格納されています。
 - components/  : 再利用可能なReactコンポーネントが格納されています。
@@ -38,7 +40,6 @@
 - resources/   : apiを利用するクライアントのモジュールを格納しています。
 - utils/       : UI関連のユーティリティを格納しています。
 - .env         : 環境変数を管理するファイル
-- server.js    : React, Next.js, Express,
 ```
 
 ## 開発環境のセットアップ手順

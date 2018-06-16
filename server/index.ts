@@ -1,8 +1,8 @@
-require("dotenv").config();
+import { config } from "dotenv";
+import * as express from "express";
+import * as next from "next";
 
-const express = require("express");
-const next = require("next");
-
+config();
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
 
@@ -13,6 +13,7 @@ app.prepare().then(() => {
   const server = express();
 
   server.use("/api", (req, res) => {
+    console.log(req);
     res.send("hello from api!");
   });
 

@@ -7,8 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "nodemon server/index.ts",
-    "build": "next build && tsc --project tsconfig.server.json",
+    "dev": "nodemon src/server/index.ts",
+    "build": "next build src && tsc --project tsconfig.server.json",
     "start": "NODE_ENV=production node .next/production-server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

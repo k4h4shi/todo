@@ -3,11 +3,17 @@
 
 // ./pages/_document.js
 import Document, { Head, Main, NextScript } from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const sheet = new ServerStyleSheet();
+    const page = ctx.renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />)
+    );
+    const styleTags = sheet.getStyleElement();
+    return { ...initialProps, ...page, styleTags };
   }
 
   render() {
@@ -88,6 +94,7 @@ export default class MyDocument extends Document {
               text-decoration: none;
             }
           `}</style>
+          {this.props.styleTags}
         </Head>
         <body>
           <Main />

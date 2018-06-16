@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/k4h4shi/todo#readme",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "next": "^6.0.3",
     "react": "^16.4.1",

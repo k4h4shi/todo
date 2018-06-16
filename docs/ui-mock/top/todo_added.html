@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>TODO</title>
+  <link href="./style.css" rel="stylesheet" type="text/css" />
+  <link href="../common.css" rel="stylesheet" type="text/css" />
+  <link href="../normalize.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="app">
+  <header>
+    <h1>TODOリスト</h1>
+  </header>
+  <main class='app-content'>
+    <div class="add-todo-wrapper">
+      <h2 class="add-todo-header">新しいTodoリストを作成する</h2>
+      <form>
+        <input type='text' name="todolist-name" placeholder="リスト名を入力してください" />
+        <button>リストの作成</button>
+      </form>
+    </div>
+
+    <div class="todo-lists-wrapper">
+      <h2 class="add-todo-header">Todoリスト一覧</h2>
+      <div class="message-wrapper">
+        <p class="success-message">新しいToDoリストが作成されました。</p>
+      </div>
+      <ul class="todo-lists">
+        <li class="todo-list">
+          <h3 class="todo-list-title">
+            <a href="http://127.0.0.1:8081/detail.html">買い物リスト</a>
+          </h3>
+          <div class="todo-list-check-state">状態: 5個中3個がチェック済み</div>
+          <div class="todo-list-due">期限: ~2016年8月30日</div>
+        </li>
+        <li class="todo-list">
+          <h3 class="todo-list-title">
+            <a href="">レポート課題</a>
+          </h3>
+          <div class="todo-list-check-state">状態: 5個中3個がチェック済み</div>
+          <div class="todo-list-due">期限: ~2016年8月10日</div>
+        </li>
+      </ul>
+    </div>
+  </main>
+  <footer>
+    <p class="copy-right">© 2018
+      <a href='http://k4h4shi.com'>k4h4shi</a>
+    </p>
+  </footer>
+</body>
+
+</html>

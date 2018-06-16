@@ -1,0 +1,18 @@
+# Entities
+
+[todolists]
+*id {label: "Number, not null"}
+name {label: "String, not null, unique"}
+createdAt {label: "Date, not null"}
+updatedAt {label: "Date, not null"}
+
+[todos]
+*id {label: "Number, not null"}
++todolist_id {label: "Number, not null"}
+name {label: "String, not null, unique"}
+due {label: "Date, not null"}
+createdAt {label: "Date, not null"}
+updatedAt {label: "Date, not null"}
+
+# Relationships
+todolists 1--* todos

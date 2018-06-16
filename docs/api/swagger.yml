@@ -1,0 +1,246 @@
+swagger: '2.0'
+info:
+  title: ToDo API
+  description: Todo の API 定義を記述します。
+  version: 1.0.0
+basePath: /api/
+schemes:
+  - http
+paths:
+  /todolists:
+    get:
+      tags:
+        - Todolist
+      summary: Todoリストの一覧を取得します。
+      operationId: getTodolists
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Todolist'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - Todolist
+      summary: Todoリストを作成します。
+      operationId: createTodolist
+      produces:
+        - application/json
+      consumes:
+        - application/x-www-form-urlencoded
+        - application/json
+      parameters:
+        - name: name
+          in: formData
+          description: Todolistの名前。
+          type: string
+          required: true
+          minLength: 1
+          maxLength: 30
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /todolists/{todolist_id}:
+    get:
+      tags:
+        - Todolist
+      summary: 任意のTodoを取得します。
+      operationId: getTodolist
+      produces:
+        - application/json
+      parameters:
+        - name: todolist_id
+          in: path
+          description: TodolistのID。
+          type: number
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Todolist'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /todolists/{todolist_id}/todos:
+    post:
+      tags:
+        - Todolist
+      summary: 任意のTodoリストのTodoを作成します。
+      operationId: createTodo
+      produces:
+        - application/json
+      consumes:
+        - application/x-www-form-urlencoded
+        - application/json
+      parameters:
+        - name: todolist_id
+          in: path
+          description: TodolistのID。
+          type: number
+          required: true
+        - name: name
+          in: formData
+          description: Todoの名前。
+          type: string
+          required: true
+          minLength: 1
+          maxLength: 30
+        - name: completed
+          in: formData
+          description: Todoが完了してるかどうか。
+          type: boolean
+          required: true
+        - name: due
+          in: formData
+          description: Todoの期日。
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /todolists/{todolist_id}/todos/{todo_id}:
+    patch:
+      tags:
+        - Todolist
+      summary: 任意のTodoリストのTodoを更新します。
+      operationId: updateTodo
+      produces:
+        - application/json
+      consumes:
+        - application/x-www-form-urlencoded
+        - application/json
+      parameters:
+        - name: todolist_id
+          in: path
+          description: TodolistのID。
+          type: number
+          required: true
+        - name: todo_id
+          in: path
+          description: TodoのID。
+          type: number
+          required: true
+        - name: name
+          in: formData
+          description: Todoの名前。
+          type: string
+          required: true
+          minLength: 1
+          maxLength: 30
+        - name: completed
+          in: formData
+          description: Todoが完了してるかどうか。
+          type: boolean
+          required: true
+        - name: due
+          in: formData
+          description: Todoの期日。
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /search:
+    get:
+      tags:
+        - Search
+      summary: TodoリストとTodoを検索します。
+      operationId: getSearch
+      produces:
+        - application/json
+      parameters:
+        - name: q
+          in: query
+          description: クエリパラメータ。
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Todolist'
+        '500':
+          description: Internal Server Error
+definitions:
+  Todolist:
+    description: ToDoリスト
+    required:
+      - name
+    properties:
+      id:
+        type: number
+        example: 0
+      name:
+        type: string
+        example: "ToDoアプリ"
+      todos:
+        type: array
+        items:
+          $ref: '#/definitions/Todo'
+      createdAt:
+        type: string
+        example: "2018-05-18 19:56:50.635"
+      updatedAt:
+        type: string
+        example: "2018-05-18 19:56:50.635"
+  Todo:
+    description: ToDo
+    required:
+      - name
+      - due
+      - compoleted
+    properties:
+      id:
+        type: number
+        example: 0
+      todolist_id:
+        type: number
+        example: 0
+      name:
+        type: string
+        example: "ToDoアプリのAPIの設計をする"
+      due:
+        type: string
+        example: "2018-05-18"
+      completed:
+        type: boolean
+        example: false
+      createdAt:
+        type: string
+        example: "2018-05-18 19:56:50.635"
+      updatedAt:
+        type: string
+        example: "2018-05-18 19:56:50.635"
+  Search:
+    description: TodoとTodoリストの検索結果
+    properties:
+      q:
+        type: string
+        example: "ToDo"
+      todolists:
+        type: array
+        items:
+          $ref: '#/definitions/Todolist'
+      todos:
+        type: array
+        items:
+          $ref: '#/definitions/Todo'

@@ -28,33 +28,11 @@ export default class MyDocument extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
           />
           <style jsx global>{`
-            h2 {
-              margin: 8px;
-              font-size: 22px;
-            }
-
-            h3 {
-              margin: 10px 8px;
-              font-size: 18px;
-            }
-
-            h4 {
-              font-size: 16px;
-            }
             a:link {
               color: #454545;
             }
             a:visited {
               color: #c8c8c8;
-            }
-
-            .copy-right {
-              text-align: center;
-            }
-
-            .copy-right > a {
-              color: white;
-              text-decoration: none;
             }
           `}</style>
           {this.props.styleTags}

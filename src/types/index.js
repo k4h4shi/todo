@@ -14,3 +14,18 @@ export type TodoList = {
   createdAt: string,
   updatedAt: string
 };
+
+export type TodoSearchResult = {
+  _id: string,
+  list_id: string,
+  name: string,
+  listname: string,
+  due: string,
+  createdAt: string
+};
+
+export type TodoListSearchResult = {
+  _id: string,
+  name: string,
+  createdAt: string
+};

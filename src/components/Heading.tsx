@@ -28,11 +28,11 @@ const Heading = styled.h1`
 `;
 
 const Title = styled.h2`
-  margin: 8px;
+  margin: 10px 8px;
   font-size: 22px;
 `;
 
 const SubHeading = styled.h3`
-  margin: 10px 8px;
+  margin: 15px 8px;
   font-size: 18px;
 `;

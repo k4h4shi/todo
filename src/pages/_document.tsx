@@ -2,6 +2,7 @@
 // Event handlers like onClick can't be added to this file
 
 // ./pages/_document.js
+import * as React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
@@ -27,31 +28,6 @@ export default class MyDocument extends Document {
             href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
           />
           <style jsx global>{`
-            .app {
-              display: flex;
-              min-height: 100vh;
-              flex-direction: column;
-              color: #454545;
-            }
-            .app-content {
-              flex: 1;
-            }
-
-            header {
-              color: white;
-              background-color: #454545;
-            }
-
-            footer {
-              color: white;
-              background-color: #454545;
-            }
-
-            header > h1 {
-              margin-left: 20px;
-              font-size: 28px;
-            }
-
             h2 {
               margin: 8px;
               font-size: 22px;
@@ -70,19 +46,6 @@ export default class MyDocument extends Document {
             }
             a:visited {
               color: #c8c8c8;
-            }
-
-            .app-content {
-              flex: 1;
-              margin: 40px 100px;
-            }
-
-            .error-message {
-              color: #f76776;
-            }
-
-            .success-message {
-              color: #72eaa6;
             }
 
             .copy-right {

@@ -1,62 +1,51 @@
 export default () => (
-  <div className="app">
-    <header>
-      <h1>TODOリスト</h1>
-    </header>
-    <main className="app-content">
-      <div className="add-todo-wrapper">
-        <h2 className="add-todo-header">新しいTodoを作成する</h2>
-        <form>
-          <div className="form-inputs">
-            <div className="form-input">
-              <span>ToDo名:</span>
-              <input
-                type="text"
-                name="todolist-name"
-                placeholder="ToDo名を入力してください"
-              />
-            </div>
-            <div className="form-input">
-              <span>期限:</span>
-              <input
-                type="text"
-                name="todolist-name"
-                placeholder="期限を入力してください"
-              />
-            </div>
+  <div>
+    <div className="add-todo-wrapper">
+      <h2 className="add-todo-header">新しいTodoを作成する</h2>
+      <form>
+        <div className="form-inputs">
+          <div className="form-input">
+            <span>ToDo名:</span>
+            <input
+              type="text"
+              name="todolist-name"
+              placeholder="ToDo名を入力してください"
+            />
           </div>
-          <button>追加</button>
-        </form>
-      </div>
-      <div className="message-wrapper" />
-      <div className="todo-lists-wrapper">
-        <h2 className="add-todo-header">Todo一覧</h2>
-        <ul className="todo-list">
-          <li>
-            <div>
-              <h4 className="todo-list-title">レポートサマリーを作る</h4>
-              <div className="todo-list-due">期限: ~2016年8月30日</div>
-              <div className="todo-list-created">作成日: ~2016年8月30日</div>
-            </div>
-            <button>未完了</button>
-          </li>
-          <li>
-            <div>
-              <h4 className="todo-list-title">レポート表紙を作る</h4>
-              <div className="todo-list-due">期限: ~2016年8月10日</div>
-              <div className="todo-list-created">作成日: ~2016年8月30日</div>
-            </div>
-            <button className="completed">完了</button>
-          </li>
-        </ul>
-      </div>
-    </main>
-    <footer>
-      <p className="copy-right">
-        © 2018
-        <a href="http://k4h4shi.com">k4h4shi</a>
-      </p>
-    </footer>
+          <div className="form-input">
+            <span>期限:</span>
+            <input
+              type="text"
+              name="todolist-name"
+              placeholder="期限を入力してください"
+            />
+          </div>
+        </div>
+        <button>追加</button>
+      </form>
+    </div>
+    <div className="message-wrapper" />
+    <div className="todo-lists-wrapper">
+      <h2 className="add-todo-header">Todo一覧</h2>
+      <ul className="todo-list">
+        <li>
+          <div>
+            <h4 className="todo-list-title">レポートサマリーを作る</h4>
+            <div className="todo-list-due">期限: ~2016年8月30日</div>
+            <div className="todo-list-created">作成日: ~2016年8月30日</div>
+          </div>
+          <button>未完了</button>
+        </li>
+        <li>
+          <div>
+            <h4 className="todo-list-title">レポート表紙を作る</h4>
+            <div className="todo-list-due">期限: ~2016年8月10日</div>
+            <div className="todo-list-created">作成日: ~2016年8月30日</div>
+          </div>
+          <button className="completed">完了</button>
+        </li>
+      </ul>
+    </div>
     <style jsx>{`
       .add-todo-wrapper > form {
         display: flex;

@@ -11,3 +11,4 @@ export { default as TodoListState } from "./TodoListState";
 export { default as TodoListDue } from "./TodoListDue";
 export { default as Input } from "./Input";
 export { default as Button } from "./Button";
+export { default as FormatDate } from "./FormatDate";

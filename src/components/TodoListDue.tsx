@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import * as moment from "moment";
+import moment from "moment";
 import { Todo } from "../types";
+
+import FormatDate from "./FormatDate";
 
 interface Props {
   todos: Todo[];
@@ -30,11 +32,13 @@ export default class TodoListDue extends Component<
   }
 
   render() {
-    moment.locale("ja");
     const closestDueTodo = this._closestDueTodo();
-    const closestDue = closestDueTodo
-      ? moment(closestDueTodo.due).format("LL")
-      : "-";
-    return <p>{`期限: ${closestDue}`}</p>;
+    return closestDueTodo ? (
+      <p>
+        期限: <FormatDate date={closestDueTodo.due} />
+      </p>
+    ) : (
+      <p>期限: -</p>
+    );
   }
 }

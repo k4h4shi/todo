@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Heading, Message } from "../components";
+import { Button, FormatDate, Heading, Message } from "../components";
 import { Todo } from "../types";
 
 interface Props {
@@ -17,9 +17,13 @@ export default ({ todoAdded, todos, toggleTodo }: Props) => (
       {todos.map((todo, i) => (
         <ListItem key={i}>
           <TodoInfo>
-            <TodoListName>{todo.name}</TodoListName>
-            <Due>{todo.due}</Due>
-            <CreatedAt>{todo.createdAt}</CreatedAt>
+            <h4>{todo.name}</h4>
+            <DateWrapper>
+              期限: <FormatDate date={todo.due} />
+            </DateWrapper>
+            <DateWrapper>
+              作成日: <FormatDate date={todo.createdAt} />
+            </DateWrapper>
           </TodoInfo>
           <Button
             type="button"
@@ -53,6 +57,6 @@ const TodoInfo = styled.div`
   flex: 6;
 `;
 
-const TodoListName = styled.h4``;
-const Due = styled.div``;
-const CreatedAt = styled.div``;
+const DateWrapper = styled.div`
+  margin-top: 10px;
+`;

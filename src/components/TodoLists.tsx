@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import { Heading, Message, TodoListState, TodoListDue } from "../components";
 import { TodoList } from "../types";
@@ -16,11 +17,13 @@ export default ({ todoAdded, todoLists }: Props) => (
     )}
     <List>
       {todoLists.map((todoList, i) => (
-        <ListItem key={i}>
-          <TodoListName>{todoList.name}</TodoListName>
-          <TodoListState todos={todoList.todos} />
-          <TodoListDue todos={todoList.todos} />
-        </ListItem>
+        <Link key={i} href={`/detail/${todoList._id}`}>
+          <ListItem>
+            <TodoListName>{todoList.name}</TodoListName>
+            <TodoListState todos={todoList.todos} />
+            <TodoListDue todos={todoList.todos} />
+          </ListItem>
+        </Link>
       ))}
     </List>
   </div>

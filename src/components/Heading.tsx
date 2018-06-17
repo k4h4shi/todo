@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-type Type = "title" | "subheading";
+type Type = "heading" | "title" | "subheading";
 
 interface Props {
   type: Type;
@@ -11,6 +11,8 @@ interface Props {
 export default ({ type, children }: Props) =>
   (type => {
     switch (type) {
+      case "heading":
+        return <Heading>{children}</Heading>;
       case "title":
         return <Title>{children}</Title>;
       case "subheading":
@@ -19,6 +21,11 @@ export default ({ type, children }: Props) =>
         return <p>{children}</p>;
     }
   })(type);
+
+const Heading = styled.h1`
+  margin: 8px 8px 30px 8px;
+  font-size: 28px;
+`;
 
 const Title = styled.h2`
   margin: 8px;

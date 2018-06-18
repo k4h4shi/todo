@@ -20,7 +20,7 @@ export default class Index extends React.Component<Props, State> {
           {
             _id: "0",
             name: "初めてのTodoを作る",
-            completed: true,
+            completed: false,
             due: "2018-05-18",
             createdAt: "2018-05-18 19:56:50.635",
             updatedAt: "2018-05-18 19:56:50.635"
@@ -28,7 +28,7 @@ export default class Index extends React.Component<Props, State> {
           {
             _id: "0",
             name: "初めてのTodoを作る",
-            completed: true,
+            completed: false,
             due: "2018-05-16",
             createdAt: "2018-05-18 19:56:50.635",
             updatedAt: "2018-05-18 19:56:50.635"

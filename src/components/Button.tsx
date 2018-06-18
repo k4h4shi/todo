@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-type Type = "success" | "error" | "default";
+type Type = "success" | "error" | undefined;
 
 interface Props {
   type: string;
-  onClick: () => void;
-  colorType: Type;
+  onClick?: () => void;
+  colorType?: Type;
   children: string;
 }
 
@@ -21,7 +21,7 @@ const Button = styled.button`
   padding: 12px 20px;
   border-radius: 5px;
   color: white;
-  background-color: ${(props: { colorType: Type }) => {
+  background-color: ${(props: { colorType?: Type }) => {
     switch (props.colorType) {
       case "error":
         return "#f76776";

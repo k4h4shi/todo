@@ -69,9 +69,7 @@ export default class TodoForm extends Component<Props, State> {
               />
             </FormInput>
           </FormInputs>
-          <Button type="submit" colorType="default" onClick={() => {}}>
-            追加
-          </Button>
+          <Button type="submit">追加</Button>
         </Form>
       </div>
     );

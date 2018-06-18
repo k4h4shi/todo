@@ -63,9 +63,7 @@ export default class TodoListForm extends Component<Props, State> {
             onChange={this._handleOnChange}
             placeholder="リスト名を入力してください"
           />
-          <Button type="submit" colorType="default" onClick={() => {}}>
-            リストの作成
-          </Button>
+          <Button type="submit">リストの作成</Button>
         </Form>
       </div>
     );

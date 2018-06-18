@@ -52,9 +52,7 @@ export default class SearchForm extends Component<Props, State> {
             onChange={this._handleOnChange}
             placeholder="検索した文字列を入力してください"
           />
-          <Button type="submit" colorType="default" onClick={() => {}}>
-            検索
-          </Button>
+          <Button type="submit">検索</Button>
         </Form>
       </div>
     );

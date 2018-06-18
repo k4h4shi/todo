@@ -17,8 +17,8 @@ export default class TodoListDue extends Component<
 > {
   _closestDueTodo() {
     const { todos } = this.props;
-
-    return todos.filter(t => !t.completed).sort((t1, t2) => {
+    const onlyIncompleted = todos.filter(t => !t.completed);
+    const orderedByDue = onlyIncompleted.sort((t1, t2) => {
       const m1 = moment(t1.due);
       const m2 = moment(t2.due);
       if (m1.isBefore(m2)) {
@@ -28,7 +28,9 @@ export default class TodoListDue extends Component<
       } else {
         return 0;
       }
-    })[0];
+    });
+    const [first] = orderedByDue;
+    return first;
   }
 
   render() {

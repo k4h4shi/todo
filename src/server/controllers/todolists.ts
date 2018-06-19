@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import TodoList, { ITodoList } from "../models/TodoList";
 
-export const index = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req);
+export const index = (_req: Request, res: Response, next: NextFunction) => {
   TodoList.find().exec((err: Error, todoLists: ITodoList[]) => {
     if (err) {
       return next(err);

@@ -1,6 +1,6 @@
 import Mongoose, { Document, Model } from "mongoose";
 import timestamps from "mongoose-timestamp";
-import { ITodo, TodoSchema } from "./Todo";
+import { ITodo } from "./Todo";
 import { Timestamp } from "bson";
 
 export interface ITodoList extends Document {
@@ -16,7 +16,12 @@ export const TodoListSchema = new Mongoose.Schema({
     required: true,
     maxlength: 30
   },
-  todos: [TodoSchema]
+  todos: [
+    {
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: "Todo"
+    }
+  ]
 });
 
 TodoListSchema.plugin(timestamps);

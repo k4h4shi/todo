@@ -1,11 +1,13 @@
 import Mongoose, { Document, Model } from "mongoose";
 import timestamps from "mongoose-timestamp";
+import { ITodoList } from "./TodoList";
 import { Timestamp } from "bson";
 
 export interface ITodo extends Document {
   name: string;
   due: string;
   completed: boolean;
+  todoList: ITodoList;
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
@@ -23,6 +25,10 @@ export const TodoSchema = new Mongoose.Schema({
   completed: {
     type: Boolean,
     default: false
+  },
+  todoList: {
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: "TodoList"
   }
 });
 

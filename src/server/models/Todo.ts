@@ -1,5 +1,7 @@
 import Mongoose, { Document, Model } from "mongoose";
 import timestamps from "mongoose-timestamp";
+import uniqueValidator from "mongoose-unique-validator";
+
 import { ITodoList } from "./TodoList";
 import { Timestamp } from "bson";
 
@@ -33,6 +35,7 @@ export const TodoSchema = new Mongoose.Schema({
 });
 
 TodoSchema.plugin(timestamps);
+TodoSchema.plugin(uniqueValidator);
 
 const Todo: Model<ITodo> = Mongoose.model<ITodo>("Todo", TodoSchema);
 

@@ -1,29 +1,31 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Button, Heading, Input } from "../components";
+import { Error } from "../types";
+
+import { Button, ErrorMessage, Heading, Input } from "../components";
 
 interface Props {
   createTodo: (name: string, due: string) => void;
+  error: Error;
 }
 
 interface State {
   name: string;
   due: string;
-  errorMessage: string;
 }
 
 export default class TodoForm extends Component<Props, State> {
   state = {
     name: "",
-    due: "",
-    errorMessage: null
+    due: ""
   };
 
   _handleOnChange = e => {
     e.preventDefault();
     const { name, value } = e.target;
-    this.setState({ [name]: value, errorMessage: null });
+    // TODO: handle typescript error
+    this.setState({ [name]: value });
   };
 
   _handleOnSubmit = e => {
@@ -31,21 +33,16 @@ export default class TodoForm extends Component<Props, State> {
 
     const { name, due } = this.state;
     const { createTodo } = this.props;
-    const errorMessage = null; // errorcheck
-
-    this.setState({ errorMessage });
-    if (errorMessage) {
-      return;
-    }
-
     createTodo(name, due);
   };
 
   render() {
+    const { error } = this.props;
     const { name, due } = this.state;
     return (
       <div>
         <Heading type="title">Todoを追加する</Heading>
+        <ErrorMessage error={error} />
         <Form onSubmit={this._handleOnSubmit}>
           <FormInputs>
             <FormInput>

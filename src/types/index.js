@@ -1,3 +1,4 @@
+// api response
 export type Todo = {
   _id: string,
   name: string,
@@ -19,4 +20,9 @@ export type TodoList = {
 export type SearchResult {
   todoLists: TodoList[],
   todos: Todo[]
+}
+
+// error
+export type Error {
+  message: string
 }

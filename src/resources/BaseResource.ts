@@ -34,7 +34,11 @@ export default class BaseResource {
         Accept: "application/json",
         "Content-Type": "application/json; charset=utf-8"
       }
-    }).then(response => this.handleResponse(response));
+    })
+      .then(response => this.handleResponse(response))
+      .catch(error => {
+        throw error;
+      });
   }
 
   /**
@@ -46,6 +50,7 @@ export default class BaseResource {
       return this.parseJson(res);
     } else {
       return this.parseJson(res).then(e => {
+        console.log(e);
         throw new Error(e.message);
       });
     }

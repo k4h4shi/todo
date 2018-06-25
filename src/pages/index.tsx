@@ -8,6 +8,7 @@ interface Props {}
 interface State {
   todoLists: TodoList[];
   todoAdded: boolean;
+  error: { message: string };
 }
 
 export default class Index extends React.Component<Props, State> {
@@ -21,24 +22,34 @@ export default class Index extends React.Component<Props, State> {
     super(props);
     this.state = {
       todoAdded: false,
-      todoLists: props.todoLists || []
+      todoLists: props.todoLists || [],
+      error: null
     };
   }
 
   _createTodoList = async (name: string) => {
     const todoListResource = new TodoListResource();
-    const todoList = await todoListResource.create({ name });
-    this.setState(prevState => ({
-      ...prevState,
-      todoLists: [...prevState.todoLists, todoList],
-      todoAdded: true
-    }));
+    try {
+      const todoList = await todoListResource.create({ name });
+      this.setState(prevState => ({
+        ...prevState,
+        todoLists: [...prevState.todoLists, todoList],
+        todoAdded: true
+      }));
+    } catch (error) {
+      this.setState({
+        error
+      });
+    }
   };
 
   render() {
     return (
       <div>
-        <TodoListForm createTodoList={this._createTodoList} />
+        <TodoListForm
+          createTodoList={this._createTodoList}
+          error={this.state.error}
+        />
         <TodoLists
           todoLists={this.state.todoLists}
           todoAdded={this.state.todoAdded}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TodoList } from "../types";
+import { TodoList, Error } from "../types";
 import {
   Heading,
   TodoForm,
@@ -16,6 +16,7 @@ interface Props {
 interface State {
   todoAdded: boolean;
   todoList: TodoList;
+  error: Error;
 }
 
 export default class Detail extends Component<Props, State> {
@@ -30,43 +31,54 @@ export default class Detail extends Component<Props, State> {
     super(props);
     this.state = {
       todoAdded: false,
-      todoList: props.todoList || null
+      todoList: props.todoList || null,
+      error: null
     };
   }
 
   _createTodo = async (name: string, due: string) => {
     const { todoListId } = this.props;
     const todoResource = new TodoResource();
-    const todo = await todoResource.create(todoListId, { name, due });
-    this.setState(prevState => ({
-      ...prevState,
-      todoList: {
-        ...prevState.todoList,
-        todos: [...prevState.todoList.todos, todo]
-      }
-    }));
+    try {
+      const todo = await todoResource.create(todoListId, { name, due });
+      this.setState(prevState => ({
+        ...prevState,
+        todoList: {
+          ...prevState.todoList,
+          todos: [...prevState.todoList.todos, todo]
+        }
+      }));
+    } catch (error) {
+      this.setState({ error });
+    }
   };
 
   _toggleTodo = async _id => {
     const todoResource = new TodoResource();
     const target = this.state.todoList.todos.find(todo => todo._id === _id);
-    const updatedTodo = await todoResource.update(_id, {
-      completed: !target.completed
-    });
 
-    const todoUpdated: boolean = !Object.keys(updatedTodo).length;
+    try {
+      const updatedTodo = await todoResource.update(_id, {
+        completed: !target.completed
+      });
 
-    if (!todoUpdated) {
-      this.setState(prev => ({
-        todoList: Object.assign({}, prev.todoList, {
-          todos: prev.todoList.todos.map(todo => {
-            if (todo._id === _id) {
-              return updatedTodo;
-            }
-            return todo;
+      // 更新する対象が存在しない場合、空オブジェクトが帰る
+      const todoUpdated: boolean = !Object.keys(updatedTodo).length;
+
+      if (!todoUpdated) {
+        this.setState(prev => ({
+          todoList: Object.assign({}, prev.todoList, {
+            todos: prev.todoList.todos.map(todo => {
+              if (todo._id === _id) {
+                return updatedTodo;
+              }
+              return todo;
+            })
           })
-        })
-      }));
+        }));
+      }
+    } catch (error) {
+      this.setState({ error });
     }
   };
 
@@ -74,7 +86,7 @@ export default class Detail extends Component<Props, State> {
     return this.state.todoList ? (
       <div>
         <Heading type="heading">{this.state.todoList.name}</Heading>
-        <TodoForm createTodo={this._createTodo} />
+        <TodoForm createTodo={this._createTodo} error={this.state.error} />
         <TodoListComponent
           todoAdded={this.state.todoAdded}
           toggleTodo={this._toggleTodo}

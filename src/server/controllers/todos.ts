@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import TodoList, { ITodoList } from "../models/TodoList";
+import TodoList from "../models/TodoList";
 import Todo, { ITodo } from "../models/Todo";
 
 /**
@@ -24,7 +24,7 @@ export const create = (req: Request, res: Response, next: NextFunction) => {
           }
         },
         { new: true }
-      ).exec((err: Error, _todoList: ITodoList) => {
+      ).exec((err: Error, _todo: ITodo) => {
         if (err) {
           return next(err);
         }
@@ -45,12 +45,17 @@ export const create = (req: Request, res: Response, next: NextFunction) => {
 export const update = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const { body } = req;
-  Todo.findByIdAndUpdate(id, {
-    $set: { ...body }
-  }).exec((err: Error, _todoList: ITodoList) => {
-    if (err) {
-      return next(err);
+  Todo.findByIdAndUpdate(
+    id,
+    {
+      $set: { ...body }
+    },
+    { new: true },
+    (err: Error, _todo: ITodo) => {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).json(_todo || "");
     }
-    res.sendStatus(200);
-  });
+  );
 };

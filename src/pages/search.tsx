@@ -5,46 +5,43 @@ import {
   TodoSearchResult,
   TodoListSearchResult
 } from "../components";
-import {
-  TodoListSearchResult as TodoListSearchResultType,
-  TodoSearchResult as TodoSearchResultType
-} from "../types";
+import { SearchResult } from "../types";
+
+import { SearchResource } from "../resources";
 
 interface Props {}
 
 interface State {
-  todos: TodoSearchResultType[];
-  todolists: TodoListSearchResultType[];
+  searchResult: SearchResult;
 }
 
-export default class Search extends Component<State, Props> {
-  state = {
-    todos: [
-      {
-        _id: "0",
-        list_id: "0",
-        listname: "レポート課題",
-        name: "レポートを終わらせる",
-        due: "2016-08-15",
-        createdAt: "2018-05-18 19:56:50.635"
+export default class Search extends Component<Props, State> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResult: {
+        todos: [],
+        todoLists: []
       }
-    ],
-    todoLists: [
-      {
-        _id: "0",
-        name: "レポートを終わらせる",
-        createdAt: "2018-05-18 19:56:50.635"
-      }
-    ]
+    };
+  }
+
+  _search = async query => {
+    const searchResource = new SearchResource();
+    const searchResult = await searchResource.find(query);
+    this.setState({
+      searchResult: searchResult
+    });
   };
 
   render() {
+    const { todos, todoLists } = this.state.searchResult;
     return (
       <div>
-        <SearchForm search={q => console.log(q)} />
+        <SearchForm search={this._search} />
         <Heading type="title">検索結果</Heading>
-        <TodoSearchResult results={this.state.todos} />
-        <TodoListSearchResult results={this.state.todos} />
+        <TodoSearchResult results={todos} />
+        <TodoListSearchResult results={todoLists} />
       </div>
     );
   }

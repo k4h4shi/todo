@@ -1,6 +1,7 @@
 import * as React from "react";
 import { TodoList } from "../types";
 import { TodoListForm, TodoLists } from "../components";
+import { TodoListResource } from "../resources";
 
 interface Props {}
 
@@ -10,39 +11,34 @@ interface State {
 }
 
 export default class Index extends React.Component<Props, State> {
-  state = {
-    todoAdded: true,
-    todoLists: [
-      {
-        _id: "0",
-        name: "初めてのTodoリスト",
-        todos: [
-          {
-            _id: "0",
-            name: "初めてのTodoを作る",
-            completed: false,
-            due: "2018-05-18",
-            createdAt: "2018-05-18 19:56:50.635",
-            updatedAt: "2018-05-18 19:56:50.635"
-          },
-          {
-            _id: "0",
-            name: "初めてのTodoを作る",
-            completed: false,
-            due: "2018-05-16",
-            createdAt: "2018-05-18 19:56:50.635",
-            updatedAt: "2018-05-18 19:56:50.635"
-          }
-        ],
-        createdAt: "2018-05-18 19:56:50.635",
-        updatedAt: "2018-05-18 19:56:50.635"
-      }
-    ]
+  static async getInitialProps(ctx) {
+    const todoListResource = new TodoListResource(ctx);
+    const todoLists = await todoListResource.findAll();
+    return { todoLists };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      todoAdded: false,
+      todoLists: props.todoLists || []
+    };
+  }
+
+  _createTodoList = async (name: string) => {
+    const todoListResource = new TodoListResource();
+    const todoList = await todoListResource.create({ name });
+    this.setState(prevState => ({
+      ...prevState,
+      todoLists: [...prevState.todoLists, todoList],
+      todoAdded: true
+    }));
   };
+
   render() {
     return (
       <div>
-        <TodoListForm createTodoList={name => console.log(name)} />
+        <TodoListForm createTodoList={this._createTodoList} />
         <TodoLists
           todoLists={this.state.todoLists}
           todoAdded={this.state.todoAdded}

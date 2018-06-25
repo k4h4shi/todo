@@ -1,6 +1,7 @@
 export type Todo = {
   _id: string,
   name: string,
+  todoList: TodoList,
   completed: boolean,
   due: string,
   createdAt: string,
@@ -15,17 +16,7 @@ export type TodoList = {
   updatedAt: string
 };
 
-export type TodoSearchResult = {
-  _id: string,
-  list_id: string,
-  name: string,
-  listname: string,
-  due: string,
-  createdAt: string
-};
-
-export type TodoListSearchResult = {
-  _id: string,
-  name: string,
-  createdAt: string
-};
+export type SearchResult {
+  todoLists: TodoList[],
+  todos: Todo[]
+}

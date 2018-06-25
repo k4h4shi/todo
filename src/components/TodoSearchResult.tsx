@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { Heading, FormatDate } from "../components";
-import { TodoSearchResult } from "../types";
+import { Todo } from "../types";
 
 interface Props {
-  results: TodoSearchResult[];
+  results: Todo[];
 }
 
 export default ({ results }: Props) => (
@@ -15,12 +15,12 @@ export default ({ results }: Props) => (
     }件見つかりました。`}</Heading>
     <List>
       {results.map((result, i) => (
-        <Link key={i} href={`/detail/${result.list_id}`}>
+        <Link key={i} href={`/detail/${result.todoList._id}`}>
           <ListItem>
             <h4>{result.name}</h4>
             <Info>
               <Column>
-                <p>リスト: {result.listname}</p>
+                <p>リスト: {result.todoList.name}</p>
               </Column>
               <Column>
                 <p>

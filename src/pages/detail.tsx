@@ -6,8 +6,11 @@ import {
   TodoList as TodoListComponent
 } from "../components";
 
+import { TodoListResource, TodoResource } from "../resources";
+
 interface Props {
   todoListId: string;
+  todoList: TodoList;
 }
 
 interface State {
@@ -16,64 +19,70 @@ interface State {
 }
 
 export default class Detail extends Component<Props, State> {
-  state = {
-    todoAdded: false,
-    todoList: {
-      _id: "0",
-      name: "初めてのTodoリスト",
-      todos: [
-        {
-          _id: "0",
-          name: "初めてのTodoを作る",
-          completed: true,
-          due: "2018-05-18",
-          createdAt: "2018-05-18 19:56:50.635",
-          updatedAt: "2018-05-18 19:56:50.635"
-        },
-        {
-          _id: "1",
-          name: "初めてのTodoを作る",
-          completed: true,
-          due: "2018-05-16",
-          createdAt: "2018-05-18 19:56:50.635",
-          updatedAt: "2018-05-18 19:56:50.635"
-        }
-      ],
-      createdAt: "2018-05-18 19:56:50.635",
-      updatedAt: "2018-05-18 19:56:50.635"
-    }
-  };
-  static async getInitialProps(initialProps) {
-    return { todoListId: initialProps.query.id };
+  static async getInitialProps(ctx) {
+    const _id = ctx.query.id;
+    const todoListResource = new TodoListResource(ctx);
+    const todoList = await todoListResource.findOneById(_id);
+    return { todoListId: ctx.query.id, todoList } as Props;
   }
 
-  toggleTodo = _id => {
-    this.setState(prev => ({
-      todoList: Object.assign({}, prev.todoList, {
-        todos: prev.todoList.todos.map(todo => {
-          if (todo._id === _id) {
-            return Object.assign({}, todo, {
-              completed: !todo.completed
-            });
-          }
-          return todo;
-        })
-      })
+  constructor(props) {
+    super(props);
+    this.state = {
+      todoAdded: false,
+      todoList: props.todoList || null
+    };
+  }
+
+  _createTodo = async (name: string, due: string) => {
+    const { todoListId } = this.props;
+    const todoResource = new TodoResource();
+    const todo = await todoResource.create(todoListId, { name, due });
+    this.setState(prevState => ({
+      ...prevState,
+      todoList: {
+        ...prevState.todoList,
+        todos: [...prevState.todoList.todos, todo]
+      }
     }));
   };
 
+  _toggleTodo = async _id => {
+    const todoResource = new TodoResource();
+    const target = this.state.todoList.todos.find(todo => todo._id === _id);
+    const updatedTodo = await todoResource.update(_id, {
+      completed: !target.completed
+    });
+
+    const todoUpdated: boolean = !Object.keys(updatedTodo).length;
+
+    if (!todoUpdated) {
+      this.setState(prev => ({
+        todoList: Object.assign({}, prev.todoList, {
+          todos: prev.todoList.todos.map(todo => {
+            if (todo._id === _id) {
+              return updatedTodo;
+            }
+            return todo;
+          })
+        })
+      }));
+    }
+  };
+
   render() {
-    console.log(this.props.todoListId);
-    return (
+    return this.state.todoList ? (
       <div>
         <Heading type="heading">{this.state.todoList.name}</Heading>
-        <TodoForm createTodo={(name, due) => console.log(`${name}: ${due}`)} />
+        <TodoForm createTodo={this._createTodo} />
         <TodoListComponent
           todoAdded={this.state.todoAdded}
-          toggleTodo={this.toggleTodo}
+          toggleTodo={this._toggleTodo}
           todos={this.state.todoList.todos}
         />
       </div>
+    ) : (
+      <p>TodoListが存在しません</p>
     );
   }
 }

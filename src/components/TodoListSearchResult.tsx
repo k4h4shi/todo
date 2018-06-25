@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { Heading, FormatDate } from "../components";
-import { TodoListSearchResult } from "../types";
+import { TodoList } from "../types";
 
 interface Props {
-  results: TodoListSearchResult[];
+  results: TodoList[];
 }
 
 export default ({ results }: Props) => (

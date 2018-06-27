@@ -31,7 +31,7 @@ export default class Detail extends Component<Props, State> {
     super(props);
     this.state = {
       todoAdded: false,
-      todoList: props.todoList || null,
+      todoList: props.todoList,
       error: null
     };
   }
@@ -67,9 +67,10 @@ export default class Detail extends Component<Props, State> {
         completed: !target.completed
       });
 
-      // 更新する対象が存在しない場合、空オブジェクトが帰る
+      // 更新する対象が存在しなかった場合、空オブジェクトが返る
       const todoUpdated: boolean = !Object.keys(updatedTodo).length;
 
+      // 更新があった場合、ローカルのStateも更新する
       if (!todoUpdated) {
         this.setState(prev => ({
           todoList: Object.assign({}, prev.todoList, {

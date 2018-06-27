@@ -15,9 +15,11 @@ export const index = (req: Request, res: Response, next: NextFunction) => {
 
   Promise.all([
     TodoList.find({ name: new RegExp(`${q}`) })
+      .sort("-createdAt")
       .populate("todos")
       .exec(),
     Todo.find({ name: new RegExp(`${q}`) })
+      .sort("-createdAt")
       .populate("todoList")
       .exec()
   ])

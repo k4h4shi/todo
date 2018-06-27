@@ -19,10 +19,7 @@ export default class Search extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      searchResult: {
-        todos: [],
-        todoLists: []
-      }
+      searchResult: null
     };
   }
 
@@ -35,13 +32,17 @@ export default class Search extends Component<Props, State> {
   };
 
   render() {
-    const { todos, todoLists } = this.state.searchResult;
+    const { searchResult } = this.state;
     return (
       <div>
         <SearchForm search={this._search} />
-        <Heading type="title">検索結果</Heading>
-        <TodoSearchResult results={todos} />
-        <TodoListSearchResult results={todoLists} />
+        {searchResult && (
+          <div>
+            <Heading type="title">検索結果</Heading>
+            <TodoSearchResult results={searchResult.todos} />
+            <TodoListSearchResult results={searchResult.todoLists} />
+          </div>
+        )}
       </div>
     );
   }

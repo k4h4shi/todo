@@ -10,7 +10,6 @@ import Todo, { ITodo } from "../models/Todo";
  * @param next
  */
 export const index = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.query);
   const { q } = req.query;
 
   Promise.all([

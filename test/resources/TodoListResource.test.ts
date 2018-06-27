@@ -11,7 +11,7 @@ describe("TodoListResource", () => {
     fetchMock.restore();
   });
 
-  it("should find all todolists: success", () => {
+  it("は全てのToDoリストを取得する: 成功", () => {
     const body = { todolists: ["todo1", "todo2", "todo3"] };
     fetchMock.getOnce(`${todolistResource.TEST_BASE_URL}/api/todolists`, {
       body,
@@ -22,7 +22,7 @@ describe("TodoListResource", () => {
       expect(json).toEqual(expected);
     });
   });
-  it("should find all todolists: fail", () => {
+  it("は全てのTodoリストを取得する: 失敗", () => {
     const body = {
       message: "something went wrong"
     };
@@ -38,7 +38,7 @@ describe("TodoListResource", () => {
     });
   });
 
-  it("should create new todolist: success", () => {
+  it("は新しいTodoリストを作成する: 成功", () => {
     const body = { _id: "0", name: "name" };
     fetchMock.postOnce(`${todolistResource.TEST_BASE_URL}/api/todolists`, {
       body,
@@ -51,7 +51,7 @@ describe("TodoListResource", () => {
       expect(json).toEqual(expected);
     });
   });
-  it("should create new todolist: fail", () => {
+  it("は新しいTodoリストを作成する: 失敗", () => {
     const errorMessage =
       "Todo validation failed: name: Path `name` is required.";
     const body = {
@@ -69,7 +69,7 @@ describe("TodoListResource", () => {
     });
   });
 
-  it("should get a todolist: success", () => {
+  it("はTodoリストを取得する: 成功", () => {
     const _id = "0";
     const body = { _id, name: "name" };
     fetchMock.getOnce(
@@ -86,7 +86,7 @@ describe("TodoListResource", () => {
       expect(json).toEqual(expected);
     });
   });
-  it("should get a todolist: fail", () => {
+  it("はTodoリストを取得する: 失敗", () => {
     const _id = "0";
     const errorMessage =
       "Todo validation failed: name: Path `name` is required.";

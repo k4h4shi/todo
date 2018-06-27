@@ -45,11 +45,16 @@ export default class Detail extends Component<Props, State> {
         ...prevState,
         todoList: {
           ...prevState.todoList,
-          todos: [...prevState.todoList.todos, todo]
-        }
+          todos: [todo, ...prevState.todoList.todos]
+        },
+        error: null
       }));
     } catch (error) {
-      this.setState({ error });
+      if (error.name === "ValidationError") {
+        this.setState({
+          error
+        });
+      }
     }
   };
 
@@ -78,7 +83,11 @@ export default class Detail extends Component<Props, State> {
         }));
       }
     } catch (error) {
-      this.setState({ error });
+      if (error.name === "ValidationError") {
+        this.setState({
+          error
+        });
+      }
     }
   };
 

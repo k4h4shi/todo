@@ -24,5 +24,12 @@ export type SearchResult {
 
 // error
 export type Error {
-  message: string
+  message: string,
+  errors?: {
+    [key: string]: {
+      kind: string;
+      properties: { maxlength?: number };
+    }
+  }
+  _message: string
 }

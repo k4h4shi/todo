@@ -15,9 +15,7 @@ const errorHandler = (err, _req, res, _next) => {
   // TODO: クライアント側に返すTODOの内容を設定する
   console.error(err);
   res.status(err.status || 500);
-  res.json({
-    message: err.message
-  });
+  res.json(err);
 };
 
 export default [statusHandler, errorHandler];

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { Error } from "../types";
 
-import { Button, ErrorMessage, Heading, Input } from "../components";
+import { Button, ValidationErrorMessage, Heading, Input } from "../components";
 
 interface Props {
   createTodo: (name: string, due: string) => void;
@@ -42,7 +42,7 @@ export default class TodoForm extends Component<Props, State> {
     return (
       <div>
         <Heading type="title">Todoを追加する</Heading>
-        <ErrorMessage error={error} />
+        <ValidationErrorMessage error={error} />
         <Form onSubmit={this._handleOnSubmit}>
           <FormInputs>
             <FormInput>

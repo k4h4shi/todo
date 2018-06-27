@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TodoList } from "../types";
+import { TodoList, Error } from "../types";
 import { TodoListForm, TodoLists } from "../components";
 import { TodoListResource } from "../resources";
 
@@ -8,7 +8,7 @@ interface Props {}
 interface State {
   todoLists: TodoList[];
   todoAdded: boolean;
-  error: { message: string };
+  error: Error;
 }
 
 export default class Index extends React.Component<Props, State> {
@@ -34,12 +34,15 @@ export default class Index extends React.Component<Props, State> {
       this.setState(prevState => ({
         ...prevState,
         todoLists: [...prevState.todoLists, todoList],
-        todoAdded: true
+        todoAdded: true,
+        error: null
       }));
     } catch (error) {
-      this.setState({
-        error
-      });
+      if (error.name === "ValidationError") {
+        this.setState({
+          error
+        });
+      }
     }
   };
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Error } from "../types";
-import { Button, Input, ErrorMessage, Heading } from "../components";
+import { Button, Input, ValidationErrorMessage, Heading } from "../components";
 
 interface Props {
   createTodoList: (todoName: string) => void;
@@ -38,7 +38,7 @@ export default class TodoListForm extends Component<Props, State> {
     return (
       <div>
         <Heading type="title">新しいTodoリストを作成する</Heading>
-        <ErrorMessage error={error} />
+        <ValidationErrorMessage error={error} />
         <Form onSubmit={this._handleSubmit}>
           <Input
             type="text"

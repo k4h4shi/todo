@@ -21,11 +21,16 @@ export default class TodoForm extends Component<Props, State> {
     due: ""
   };
 
-  _handleOnChange = e => {
+  _handleOnNameChange = e => {
     e.preventDefault();
-    const { name, value } = e.target;
-    // TODO: handle typescript error
-    this.setState({ [name]: value });
+    const { value } = e.target;
+    this.setState({ name: value });
+  };
+
+  _handleOnDueChange = e => {
+    e.preventDefault();
+    const { value } = e.target;
+    this.setState({ due: value });
   };
 
   _handleOnSubmit = e => {
@@ -51,7 +56,7 @@ export default class TodoForm extends Component<Props, State> {
                 value={name}
                 type="text"
                 name="name"
-                onChange={this._handleOnChange}
+                onChange={this._handleOnNameChange}
                 placeholder="ToDo名を入力してください"
               />
             </FormInput>
@@ -61,7 +66,7 @@ export default class TodoForm extends Component<Props, State> {
                 value={due}
                 type="date"
                 name="due"
-                onChange={this._handleOnChange}
+                onChange={this._handleOnDueChange}
                 placeholder="期限を入力してください"
               />
             </FormInput>

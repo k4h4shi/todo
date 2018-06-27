@@ -18,10 +18,10 @@ export default class SearchForm extends Component<Props, State> {
     errorMessage: null
   };
 
-  _handleOnChange = e => {
+  _handleOnInputChange = e => {
     e.preventDefault();
-    const { name, value } = e.target;
-    this.setState({ [name]: value, errorMessage: null });
+    const { value } = e.target;
+    this.setState({ query: value, errorMessage: null });
   };
 
   _handleOnSubmit = e => {
@@ -49,7 +49,7 @@ export default class SearchForm extends Component<Props, State> {
             type="text"
             name="query"
             value={query}
-            onChange={this._handleOnChange}
+            onChange={this._handleOnInputChange}
             placeholder="検索した文字列を入力してください"
           />
           <Button type="submit">検索</Button>

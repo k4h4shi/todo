@@ -34,7 +34,13 @@ export const index = (_req: Request, res: Response, next: NextFunction) => {
 export const show = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   TodoList.findById(id)
-    .populate("todos")
+    // Todoリストに紐付くtodoを作成日が新しい順に並び替えた上で連結する
+    .populate({
+      path: "todos",
+      options: {
+        sort: "-createdAt"
+      }
+    })
     .exec((err: Error, todoList: ITodoList) => {
       if (err) {
         return next(err);

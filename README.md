@@ -12,7 +12,6 @@
 
 - TypeScript
 - React
-- Redux
 - Next.js
 - Express
 - Mongodb
@@ -33,12 +32,11 @@
   - controllers/ : apiのコントローラーのディレクトリです。
   - models/      : apiのモデルのディレクトリです。
   - routes/      : apiのルートのディレクトリです。
-- modules/     : Redux関連モジュールが格納されています。
-- containers/  : Reduxと連携するReactコンポーネントが格納されています。
 - components/  : 再利用可能なReactコンポーネントが格納されています。
+- config/      : 設定関連のモジュールを格納しています。
 - pages/       : 画面単位のReactコンポーネントが格納されています。
 - resources/   : apiを利用するクライアントのモジュールを格納しています。
-- utils/       : UI関連のユーティリティを格納しています。
+- types/       : 型定義のファイルを格納しています。
 - .env         : 環境変数を管理するファイル
 ```
 
@@ -59,4 +57,12 @@ $ npm install
 
 ### 環境変数
 
-.env.sample をコピーして、.env ファイルを作成する。
+.env.sample をコピーして、.env ファイルを作成してください。
+
+### 起動
+
+以下の環境で開発用サーバーが立ち上がります。
+
+```
+$ npm run dev
+```

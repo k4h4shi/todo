@@ -1,0 +1,6 @@
+{
+  "env": {
+    "PORT": 80,
+    "MONGO_DATABASE": "@mongo_database"
+  }
+}

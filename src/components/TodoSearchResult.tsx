@@ -11,9 +11,10 @@ interface Props {
 
 export default ({ results }: Props) => (
   <div>
-    <Heading type="subheading">{`ToDoが${
-      results.length
-    }件見つかりました。`}</Heading>
+    <Heading
+      type="subheading"
+      color={results.length === 0 && colors.red}
+    >{`ToDoが${results.length}件見つかりました。`}</Heading>
     <List>
       {results.map((result, i) => (
         <Link key={i} href={`/detail/${result.todoList._id}`}>

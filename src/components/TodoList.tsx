@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button, FormatDate, Heading, Message } from "../components";
 import { Todo } from "../types";
+import colors from "../config/colors";
 
 interface Props {
   todoAdded: boolean;
@@ -49,7 +50,7 @@ const ListItem = styled.li`
   list-style: none;
   margin: 3px;
   padding: 12px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid ${colors.lightgrey};
   border-radius: 5px;
 `;
 

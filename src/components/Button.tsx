@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "../config/colors";
 
 type Type = "success" | "error" | undefined;
 
@@ -24,11 +25,11 @@ const Button = styled.button`
   background-color: ${(props: { colorType?: Type }) => {
     switch (props.colorType) {
       case "error":
-        return "#f76776";
+        return colors.red;
       case "success":
-        return "#72eaa6";
+        return colors.green;
       default:
-        return "#c8c8c8";
+        return colors.grey;
     }
   }};
 `;

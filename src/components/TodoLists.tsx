@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { Heading, Message, TodoListState, TodoListDue } from "../components";
 import { TodoList } from "../types";
+import colors from "../config/colors";
 
 interface Props {
   todoAdded: boolean;
@@ -39,7 +40,7 @@ const ListItem = styled.li`
   list-style: none;
   margin: 3px;
   padding: 12px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid ${colors.lightgrey};
   border-radius: 5px;
 `;
 

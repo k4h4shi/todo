@@ -27,14 +27,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css"
           />
-          <style jsx global>{`
-            a:link {
-              color: #454545;
-            }
-            a:visited {
-              color: #c8c8c8;
-            }
-          `}</style>
           {this.props.styleTags}
         </Head>
         <body>

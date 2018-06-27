@@ -42,11 +42,10 @@ describe("TodoResource", () => {
       }
     );
 
-    const expected = new Error(body.message);
     todoResource
       .create(todoListId, { name: "todo", due: "2018-01-01" })
       .catch(error => {
-        expect(error).toEqual(expected);
+        expect(error).toEqual(body);
       });
   });
 
@@ -89,11 +88,10 @@ describe("TodoResource", () => {
       headers: { "content-type": "application/json" }
     });
 
-    const expected = new Error(body.message);
     todoResource
       .update(todoId, { name: "todo", due: "2018-01-01" })
       .catch(error => {
-        expect(error).toEqual(expected);
+        expect(error).toEqual(body);
       });
   });
 });

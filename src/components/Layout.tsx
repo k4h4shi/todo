@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
+import colors from "../config/colors";
 
 interface Props {
   children: JSX.Element;
@@ -19,7 +20,7 @@ const App = styled.div`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  color: #454545;
+  color: ${colors.black};
 `;
 
 const Main = styled.main`

@@ -4,6 +4,7 @@ import next from "next";
 import mongoose from "mongoose";
 import api from "./api";
 import routes from "./routes";
+import errorHandlers from "./handlers/errors";
 
 config();
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -28,6 +29,8 @@ app.prepare().then(() => {
   server.use("/api", api);
 
   server.use(handler);
+
+  server.use(errorHandlers);
 
   server.listen(port, err => {
     if (err) throw err;

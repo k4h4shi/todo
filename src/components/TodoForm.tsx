@@ -1,29 +1,36 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Button, Heading, Input } from "../components";
+import { Error } from "../types";
+
+import { Button, ValidationErrorMessage, Heading, Input } from "../components";
 
 interface Props {
   createTodo: (name: string, due: string) => void;
+  error: Error;
 }
 
 interface State {
   name: string;
   due: string;
-  errorMessage: string;
 }
 
 export default class TodoForm extends Component<Props, State> {
   state = {
     name: "",
-    due: "",
-    errorMessage: null
+    due: ""
   };
 
-  _handleOnChange = e => {
+  _handleOnNameChange = e => {
     e.preventDefault();
-    const { name, value } = e.target;
-    this.setState({ [name]: value, errorMessage: null });
+    const { value } = e.target;
+    this.setState({ name: value });
+  };
+
+  _handleOnDueChange = e => {
+    e.preventDefault();
+    const { value } = e.target;
+    this.setState({ due: value });
   };
 
   _handleOnSubmit = e => {
@@ -31,21 +38,16 @@ export default class TodoForm extends Component<Props, State> {
 
     const { name, due } = this.state;
     const { createTodo } = this.props;
-    const errorMessage = null; // errorcheck
-
-    this.setState({ errorMessage });
-    if (errorMessage) {
-      return;
-    }
-
     createTodo(name, due);
   };
 
   render() {
+    const { error } = this.props;
     const { name, due } = this.state;
     return (
       <div>
         <Heading type="title">Todoを追加する</Heading>
+        <ValidationErrorMessage error={error} />
         <Form onSubmit={this._handleOnSubmit}>
           <FormInputs>
             <FormInput>
@@ -54,7 +56,7 @@ export default class TodoForm extends Component<Props, State> {
                 value={name}
                 type="text"
                 name="name"
-                onChange={this._handleOnChange}
+                onChange={this._handleOnNameChange}
                 placeholder="ToDo名を入力してください"
               />
             </FormInput>
@@ -64,7 +66,7 @@ export default class TodoForm extends Component<Props, State> {
                 value={due}
                 type="date"
                 name="due"
-                onChange={this._handleOnChange}
+                onChange={this._handleOnDueChange}
                 placeholder="期限を入力してください"
               />
             </FormInput>

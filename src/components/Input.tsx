@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "../config/colors";
 
 interface Props {
   type: string;
@@ -15,7 +16,7 @@ const Input = styled.input`
   font-size: 16px;
   margin: 3px;
   padding: 12px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid ${colors.lightgrey};
   border-radius: 5px;
   box-sizing: border-box;
 `;

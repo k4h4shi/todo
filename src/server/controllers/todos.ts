@@ -15,7 +15,6 @@ export const create = (req: Request, res: Response, next: NextFunction) => {
   todo
     .save()
     .then((todo: ITodo) => {
-      console.log(todo);
       TodoList.findByIdAndUpdate(
         id,
         {

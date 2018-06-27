@@ -46,7 +46,7 @@ export default class BaseResource {
       return this.parseJson(res);
     } else {
       return this.parseJson(res).then(e => {
-        throw new Error(e.message);
+        throw e;
       });
     }
   }

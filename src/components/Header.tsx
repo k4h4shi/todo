@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import colors from "../config/colors";
 
 export default () => (
   <Header>
@@ -15,8 +16,8 @@ export default () => (
 
 const Header = styled.header`
   display: flex;
-  color: white;
-  background-color: #454545;
+  color: ${colors.white};
+  background-color: ${colors.black};
 `;
 
 const Brand = styled.h1`

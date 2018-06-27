@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import colors from "../config/colors";
 
 export default () => (
   <Footer>
@@ -11,7 +12,7 @@ export default () => (
 
 const Footer = styled.footer`
   color: white;
-  background-color: #454545;
+  background-color: ${colors.black};
 `;
 
 const CopyRight = styled.p`
@@ -19,6 +20,6 @@ const CopyRight = styled.p`
 `;
 
 const HomepageLink = styled.a`
-  color: white;
+  color: ${colors.white};
   text-decoration: none;
 `;

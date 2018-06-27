@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { Heading, FormatDate } from "../components";
 import { TodoList } from "../types";
+import colors from "../config/colors";
 
 interface Props {
   results: TodoList[];
@@ -10,9 +11,10 @@ interface Props {
 
 export default ({ results }: Props) => (
   <div>
-    <Heading type="subheading">{`ToDoリストが${
-      results.length
-    }件見つかりました。`}</Heading>
+    <Heading
+      type="subheading"
+      color={results.length === 0 && colors.red}
+    >{`ToDoリストが${results.length}件見つかりました。`}</Heading>
     <List>
       {results.map((result, i) => (
         <Link key={i} href={`/detail/${result._id}`}>
@@ -43,7 +45,7 @@ const ListItem = styled.li`
   list-style: none;
   margin: 3px;
   padding: 12px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid ${colors.lightgrey};
   border-radius: 5px;
 `;
 

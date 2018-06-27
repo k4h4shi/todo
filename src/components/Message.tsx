@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import colors from "../config/colors";
 
 type Type = "success" | "error";
 
@@ -18,11 +19,11 @@ const Text = styled.p`
   color: ${(props: { type: Type }) => {
     switch (props.type) {
       case "error":
-        return "#f76776";
+        return colors.red;
       case "success":
-        return "#72eaa6";
+        return colors.green;
       default:
-        return "#454545";
+        return colors.black;
     }
   }};
 `;

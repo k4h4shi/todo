@@ -1,60 +1,44 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
-import { Button, Input, Message, Heading } from "../components";
+import { Error } from "../types";
+import { Button, Input, ValidationErrorMessage, Heading } from "../components";
 
 interface Props {
   createTodoList: (todoName: string) => void;
+  error?: Error;
 }
 
 interface State {
   name: string;
-  errorMessage: string;
 }
 
 export default class TodoListForm extends Component<Props, State> {
-  state = {
-    name: "",
-    errorMessage: null
-  };
-
-  _checkError = (name: string): string => {
-    if (!name || name.length < 1) {
-      return "Todoリストの名称を入力してください";
-    } else if (name.length > 30) {
-      return "ToDoリストの名称は30文字以内にしてください";
-    } else {
-      return null;
-    }
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: ""
+    };
+  }
   _handleOnChange = e => {
     e.preventDefault();
     const value = e.target.value;
-    this.setState({ name: value, errorMessage: null });
+    this.setState({ name: value });
   };
 
   _handleSubmit = e => {
     e.preventDefault();
-
     const { name } = this.state;
     const { createTodoList } = this.props;
-    const errorMessage = this._checkError(name);
-
-    this.setState({ errorMessage });
-    if (errorMessage) {
-      return;
-    }
-
     createTodoList(name);
   };
 
   render() {
-    const { name, errorMessage } = this.state;
+    const { error } = this.props;
+    const { name } = this.state;
     return (
       <div>
         <Heading type="title">新しいTodoリストを作成する</Heading>
-        {errorMessage && <Message type="error">{errorMessage}</Message>}
+        <ValidationErrorMessage error={error} />
         <Form onSubmit={this._handleSubmit}>
           <Input
             type="text"

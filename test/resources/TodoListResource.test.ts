@@ -32,9 +32,8 @@ describe("TodoListResource", () => {
       headers: { "content-type": "application/json" }
     });
 
-    const expected = new Error(body.message);
     todolistResource.findAll().catch(error => {
-      expect(error).toEqual(expected);
+      expect(error).toEqual(body);
     });
   });
 
@@ -63,9 +62,8 @@ describe("TodoListResource", () => {
       headers: { "content-type": "application/json" }
     });
 
-    const expected = new Error(errorMessage);
     todolistResource.create(body).catch(error => {
-      expect(error).toEqual(expected);
+      expect(error).toEqual(body);
     });
   });
 
@@ -102,9 +100,8 @@ describe("TodoListResource", () => {
       }
     );
 
-    const expected = new Error(errorMessage);
     todolistResource.findOneById(_id).catch(error => {
-      expect(error).toEqual(expected);
+      expect(error).toEqual(body);
     });
   });
 });

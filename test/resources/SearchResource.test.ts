@@ -34,9 +34,8 @@ describe("SearchResource", () => {
       headers: { "content-type": "application/json" }
     });
 
-    const expected = new Error(body.message);
     searchResource.find(query).catch(error => {
-      expect(error).toEqual(expected);
+      expect(error).toEqual(body);
     });
   });
 });

@@ -13,29 +13,35 @@ interface Props {
 export default ({ todoAdded, todos, toggleTodo }: Props) => (
   <div>
     <Heading type="title">Todo一覧</Heading>
-    {todoAdded && <Message type="success">ToDoが追加されました。</Message>}
-    <List>
-      {todos.map((todo, i) => (
-        <ListItem key={i}>
-          <TodoInfo>
-            <h4>{todo.name}</h4>
-            <DateWrapper>
-              期限: <FormatDate date={todo.due} />
-            </DateWrapper>
-            <DateWrapper>
-              作成日: <FormatDate date={todo.createdAt} />
-            </DateWrapper>
-          </TodoInfo>
-          <Button
-            type="button"
-            colorType={todo.completed ? "success" : "error"}
-            onClick={() => toggleTodo(todo._id)}
-          >
-            {todo.completed ? "完了" : "未完了"}
-          </Button>
-        </ListItem>
-      ))}
-    </List>
+    {todos.length === 0 ? (
+      <Message type="error">登録されたToDoはございません</Message>
+    ) : (
+      <div>
+        {todoAdded && <Message type="success">ToDoが追加されました。</Message>}
+        <List>
+          {todos.map((todo, i) => (
+            <ListItem key={i}>
+              <TodoInfo>
+                <h4>{todo.name}</h4>
+                <DateWrapper>
+                  期限: <FormatDate date={todo.due} />
+                </DateWrapper>
+                <DateWrapper>
+                  作成日: <FormatDate date={todo.createdAt} />
+                </DateWrapper>
+              </TodoInfo>
+              <Button
+                type="button"
+                colorType={todo.completed ? "success" : "error"}
+                onClick={() => toggleTodo(todo._id)}
+              >
+                {todo.completed ? "完了" : "未完了"}
+              </Button>
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    )}
   </div>
 );
 

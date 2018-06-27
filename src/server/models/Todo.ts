@@ -18,6 +18,7 @@ export const TodoSchema = new Mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true,
     maxlength: 30
   },
   due: {

@@ -10,6 +10,8 @@
     "dev": "nodemon src/server/index.ts",
     "build": "next build src && tsc --project tsconfig.server.json",
     "start": "NODE_ENV=production node .next/production-server/index.js",
+    "predeploy": "npm run build",
+    "deploy": "now --public",
     "test": "jest"
   },
   "repository": {

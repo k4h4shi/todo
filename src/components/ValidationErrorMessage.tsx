@@ -38,8 +38,6 @@ function createMessageForWhere(error: Error) {
       return "ToDoリストの";
     case "Todo validation failed":
       return "ToDoの";
-    default:
-      return "どこかの";
   }
 }
 
@@ -49,8 +47,6 @@ function createMessageForTarget(errorKey: string) {
       return "名前";
     case "due":
       return "期日";
-    default:
-      return "何か";
   }
 }
 
@@ -65,7 +61,9 @@ function createMessageForKind(errorValue: {
       return "は同じものが存在してはいけません";
     case "maxlength":
       return `の最大文字数は${errorValue.properties.maxlength}です`;
-    default:
-      return "に問題があります";
+    case "user defined":
+      // 現在はTodoリストのTodoの名称のチェックのみ。
+      // 今後独自定義のvalidationが増えた場合は分岐する
+      return "は同じものが存在してはいけません";
   }
 }

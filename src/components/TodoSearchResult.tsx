@@ -13,7 +13,7 @@ export default ({ results }: Props) => (
   <div>
     <Heading
       type="subheading"
-      color={results.length === 0 && colors.red}
+      color={results.length === 0 ? colors.red : undefined}
     >{`ToDoが${results.length}件見つかりました。`}</Heading>
     <List>
       {results.map((result, i) => (

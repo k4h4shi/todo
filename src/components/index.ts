@@ -8,6 +8,7 @@ export { default as TodoForm } from "./TodoForm";
 export { default as TodoListForm } from "./TodoListForm";
 export { default as TodoList } from "./TodoList";
 export { default as TodoLists } from "./TodoLists";
+export { default as TodoListsWithTabs } from "./TodoListsWithTabs";
 export { default as TodoListState } from "./TodoListState";
 export { default as TodoListDue } from "./TodoListDue";
 export { default as Input } from "./Input";

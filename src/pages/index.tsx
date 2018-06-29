@@ -5,7 +5,7 @@ import {
   Heading,
   Message,
   TodoListForm,
-  TodoLists
+  TodoListsWithTabs
 } from "../components";
 import { TodoListResource } from "../resources";
 
@@ -64,7 +64,7 @@ export default class Index extends React.Component<Props, State> {
         {this.state.todoAdded && (
           <Message type="success">ToDoリストが追加されました。</Message>
         )}
-        <TodoLists todoLists={this.state.todoLists} />
+        <TodoListsWithTabs todoLists={this.state.todoLists} />
       </div>
     );
   }

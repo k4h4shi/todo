@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { Heading, FormatDate } from "../components";
+import { FormatDate } from "../components";
 import { TodoList } from "../types";
 import colors from "../config/colors";
 
@@ -10,29 +10,23 @@ interface Props {
 }
 
 export default ({ results }: Props) => (
-  <div>
-    <Heading
-      type="subheading"
-      color={results.length === 0 ? colors.red : undefined}
-    >{`ToDoリストが${results.length}件見つかりました。`}</Heading>
-    <List>
-      {results.map((result, i) => (
-        <Link key={i} href={`/detail/${result._id}`}>
-          <ListItem>
-            <h4>{result.name}</h4>
-            <Info>
-              <Column />
-              <Column>
-                <p>
-                  作成日: <FormatDate date={result.createdAt} />
-                </p>
-              </Column>
-            </Info>
-          </ListItem>
-        </Link>
-      ))}
-    </List>
-  </div>
+  <List>
+    {results.map((result, i) => (
+      <Link key={i} href={`/detail/${result._id}`}>
+        <ListItem>
+          <h4>{result.name}</h4>
+          <Info>
+            <Column />
+            <Column>
+              <p>
+                作成日: <FormatDate date={result.createdAt} />
+              </p>
+            </Column>
+          </Info>
+        </ListItem>
+      </Link>
+    ))}
+  </List>
 );
 
 const List = styled.ul`

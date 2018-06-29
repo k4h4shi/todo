@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Error } from "../types";
-import { Button, Input, ValidationErrorMessage, Heading } from "../components";
+import { Button, Input } from "../components";
 
 interface Props {
   createTodoList: (todoName: string) => void;
-  error?: Error;
 }
 
 interface State {
@@ -19,6 +17,7 @@ export default class TodoListForm extends Component<Props, State> {
       name: ""
     };
   }
+
   _handleOnChange = e => {
     e.preventDefault();
     const value = e.target.value;
@@ -33,12 +32,9 @@ export default class TodoListForm extends Component<Props, State> {
   };
 
   render() {
-    const { error } = this.props;
     const { name } = this.state;
     return (
       <div>
-        <Heading type="title">新しいTodoリストを作成する</Heading>
-        <ValidationErrorMessage error={error} />
         <Form onSubmit={this._handleSubmit}>
           <Input
             type="text"

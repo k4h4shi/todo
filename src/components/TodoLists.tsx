@@ -1,33 +1,29 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { Heading, Message, TodoListState, TodoListDue } from "../components";
+import { TodoListState, TodoListDue } from "../components";
 import { TodoList } from "../types";
 import colors from "../config/colors";
 
 interface Props {
-  todoAdded: boolean;
   todoLists: TodoList[];
 }
 
-export default ({ todoAdded, todoLists }: Props) => (
-  <div>
-    <Heading type="title">Todoリスト一覧</Heading>
-    {todoAdded && (
-      <Message type="success">ToDoリストが追加されました。</Message>
-    )}
-    <List>
-      {todoLists.map((todoList, i) => (
-        <Link key={i} href={`/detail/${todoList._id}`}>
-          <ListItem>
-            <TodoListName>{todoList.name}</TodoListName>
-            <TodoListState todos={todoList.todos} />
-            <TodoListDue todos={todoList.todos} />
-          </ListItem>
-        </Link>
-      ))}
-    </List>
-  </div>
+export default ({ todoLists }: Props) => (
+  <List>
+    {todoLists.map((todoList, i) => (
+      <ListItem>
+        <TodoListName>
+          <Link key={i} href={`/detail/${todoList._id}`}>
+            <a>{todoList.name}</a>
+          </Link>
+        </TodoListName>
+
+        <TodoListState todos={todoList.todos} />
+        <TodoListDue todos={todoList.todos} />
+      </ListItem>
+    ))}
+  </List>
 );
 
 const List = styled.ul`
@@ -44,4 +40,4 @@ const ListItem = styled.li`
   border-radius: 5px;
 `;
 
-const TodoListName = styled.h4``;
+const TodoListName = styled.h3``;

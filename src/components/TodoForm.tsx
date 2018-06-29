@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Error } from "../types";
-
-import { Button, ValidationErrorMessage, Heading, Input } from "../components";
+import { Button, Input } from "../components";
 
 interface Props {
   createTodo: (name: string, due: string) => void;
-  error: Error;
 }
 
 interface State {
@@ -42,38 +39,33 @@ export default class TodoForm extends Component<Props, State> {
   };
 
   render() {
-    const { error } = this.props;
     const { name, due } = this.state;
     return (
-      <div>
-        <Heading type="title">Todoを追加する</Heading>
-        <ValidationErrorMessage error={error} />
-        <Form onSubmit={this._handleOnSubmit}>
-          <FormInputs>
-            <FormInput>
-              <Label>ToDo名:</Label>
-              <Input
-                value={name}
-                type="text"
-                name="name"
-                onChange={this._handleOnNameChange}
-                placeholder="ToDo名を入力してください"
-              />
-            </FormInput>
-            <FormInput>
-              <Label>期限:</Label>
-              <Input
-                value={due}
-                type="date"
-                name="due"
-                onChange={this._handleOnDueChange}
-                placeholder="期限を入力してください"
-              />
-            </FormInput>
-          </FormInputs>
-          <Button type="submit">追加</Button>
-        </Form>
-      </div>
+      <Form onSubmit={this._handleOnSubmit}>
+        <FormInputs>
+          <FormInput>
+            <Label>ToDo名:</Label>
+            <Input
+              value={name}
+              type="text"
+              name="name"
+              onChange={this._handleOnNameChange}
+              placeholder="ToDo名を入力してください"
+            />
+          </FormInput>
+          <FormInput>
+            <Label>期限:</Label>
+            <Input
+              value={due}
+              type="date"
+              name="due"
+              onChange={this._handleOnDueChange}
+              placeholder="期限を入力してください"
+            />
+          </FormInput>
+        </FormInputs>
+        <Button type="submit">追加</Button>
+      </Form>
     );
   }
 }

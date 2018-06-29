@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Button, Heading, Input } from "../components";
+import { Button, Input } from "../components";
 
 interface Props {
   search: (name: string) => void;
@@ -42,19 +42,16 @@ export default class SearchForm extends Component<Props, State> {
   render() {
     const { query } = this.state;
     return (
-      <div>
-        <Heading type="title">Todoを検索する</Heading>
-        <Form onSubmit={this._handleOnSubmit}>
-          <Input
-            type="text"
-            name="query"
-            value={query}
-            onChange={this._handleOnInputChange}
-            placeholder="検索した文字列を入力してください"
-          />
-          <Button type="submit">検索</Button>
-        </Form>
-      </div>
+      <Form onSubmit={this._handleOnSubmit}>
+        <Input
+          type="text"
+          name="query"
+          value={query}
+          onChange={this._handleOnInputChange}
+          placeholder="検索した文字列を入力してください"
+        />
+        <Button type="submit">検索</Button>
+      </Form>
     );
   }
 }

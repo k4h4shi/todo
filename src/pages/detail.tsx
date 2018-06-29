@@ -3,6 +3,8 @@ import { TodoList, Error } from "../types";
 import {
   Heading,
   TodoForm,
+  Message,
+  ValidationErrorMessage,
   TodoList as TodoListComponent
 } from "../components";
 
@@ -96,9 +98,14 @@ export default class Detail extends Component<Props, State> {
     return this.state.todoList ? (
       <div>
         <Heading type="heading">{this.state.todoList.name}</Heading>
-        <TodoForm createTodo={this._createTodo} error={this.state.error} />
+        <Heading type="title">Todoを追加する</Heading>
+        <ValidationErrorMessage error={this.state.error} />
+        <TodoForm createTodo={this._createTodo} />
+        <Heading type="title">Todo一覧</Heading>
+        {this.state.todoAdded && (
+          <Message type="success">ToDoが追加されました。</Message>
+        )}
         <TodoListComponent
-          todoAdded={this.state.todoAdded}
           toggleTodo={this._toggleTodo}
           todos={this.state.todoList.todos}
         />

@@ -1,9 +1,17 @@
 import * as React from "react";
 import { TodoList, Error } from "../types";
-import { TodoListForm, TodoLists } from "../components";
+import {
+  ValidationErrorMessage,
+  Heading,
+  Message,
+  TodoListForm,
+  TodoLists
+} from "../components";
 import { TodoListResource } from "../resources";
 
-interface Props {}
+interface Props {
+  todoLists: TodoList[];
+}
 
 interface State {
   todoLists: TodoList[];
@@ -49,14 +57,14 @@ export default class Index extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <TodoListForm
-          createTodoList={this._createTodoList}
-          error={this.state.error}
-        />
-        <TodoLists
-          todoLists={this.state.todoLists}
-          todoAdded={this.state.todoAdded}
-        />
+        <Heading type="title">新しいTodoリストを作成する</Heading>
+        <ValidationErrorMessage error={this.state.error} />
+        <TodoListForm createTodoList={this._createTodoList} />
+        <Heading type="title">Todoリスト一覧</Heading>
+        {this.state.todoAdded && (
+          <Message type="success">ToDoリストが追加されました。</Message>
+        )}
+        <TodoLists todoLists={this.state.todoLists} />
       </div>
     );
   }

@@ -9,19 +9,17 @@ interface Props {
 
 interface State {
   query: string;
-  errorMessage: string;
 }
 
 export default class SearchForm extends Component<Props, State> {
   state = {
-    query: "",
-    errorMessage: null
+    query: ""
   };
 
   _handleOnInputChange = e => {
     e.preventDefault();
     const { value } = e.target;
-    this.setState({ query: value, errorMessage: null });
+    this.setState({ query: value });
   };
 
   _handleOnSubmit = e => {
@@ -29,12 +27,6 @@ export default class SearchForm extends Component<Props, State> {
 
     const { query } = this.state;
     const { search } = this.props;
-    const errorMessage = null; // TODO: errorcheck
-
-    this.setState({ errorMessage });
-    if (errorMessage) {
-      return;
-    }
 
     search(query);
   };

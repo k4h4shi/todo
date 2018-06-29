@@ -12,7 +12,7 @@ export default ({ results }: Props) => (
   <List>
     {results.map((result, i) => (
       <ListItem>
-        <Container>
+        <Column>
           <h3>
             <Link key={i} href={`/detail/${result.todoList._id}`}>
               <a>{result.name}</a>
@@ -31,7 +31,7 @@ export default ({ results }: Props) => (
               </p>
             </Column>
           </Info>
-        </Container>
+        </Column>
       </ListItem>
     ))}
   </List>
@@ -41,10 +41,6 @@ const List = styled.ul`
   display: flex;
   padding: 10px;
   flex-direction: column;
-`;
-
-const Container = styled.div`
-  flex: 1;
 `;
 
 const Info = styled.div`

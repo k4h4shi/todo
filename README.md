@@ -2,13 +2,19 @@
 
 シンプルな Todo 管理アプリケーションです。
 
-## 要件
+## コマンド
 
-画面仕様書を参照
+```
+$ npm start               # 動作確認用サーバーの起動
+$ npm test                # 自動テストの実施
+$ npm run dev             # 開発用サーバーの起動
+$ npm run build           # 動作確認用ビルドを生成
+$ npm run deploy          # 動作確認用環境へデプロイ
+```
 
-## 使用する技術要素
+## 使用した技術要素
 
-主に以下のライブラリ、フレームワーク、ツールを利用して構築を想定して居ます。
+主に以下のライブラリ、フレームワーク、ツールを利用して構築しました。
 
 - TypeScript
 - React
@@ -18,56 +24,59 @@
 
 ## 全体の設計・構成についての説明
 
-アプリケーションは、モノリシックなサーバーにデプロイすることを想定して設計されています。
+React + Next.js のクライアントが、Express の API を叩くような構成です。
 
-また、別途 DB サーバーが必要です。
+DB には mongodb を利用しており、Express からは Mongoose を経由で操作しています。
+
+アプリケーションはモノリシックにデプロイする想定で実装しています。
+
+また、アプリケーションの動作には、別途 mongodb サーバーを必要とします。
 
 ### ディレクトリ構成
 
-以下のようなディレクトリ構成を想定しています。
+以下のようなディレクトリ構成をとっています。
 
 ```
 - server
-  - index.ts    : React, Next.js, Express,
+  - index.ts     : Next.js, Express, Mongooseなどの設定です。
   - controllers/ : apiのコントローラーのディレクトリです。
   - models/      : apiのモデルのディレクトリです。
   - routes/      : apiのルートのディレクトリです。
-- components/  : 再利用可能なReactコンポーネントが格納されています。
-- config/      : 設定関連のモジュールを格納しています。
-- pages/       : 画面単位のReactコンポーネントが格納されています。
-- resources/   : apiを利用するクライアントのモジュールを格納しています。
-- types/       : 型定義のファイルを格納しています。
-- .env         : 環境変数を管理するファイル
+- components/    : 再利用可能なReactコンポーネントが格納されています。
+- config/        : 設定関連のモジュールを格納しています。
+- pages/         : 画面単位のReactコンポーネントが格納されています。
+- resources/     : apiを利用するクライアントのモジュールを格納しています。
+- types/         : 型定義のファイルを格納しています。
+- .env           : 環境変数を管理するファイル
 ```
 
-## 開発環境のセットアップ手順
+#### API 関連のディレクトリ
 
-### 環境要件
+- server/
 
-- Node.js v.8.11.2
-- Mongodb v.3.6.5
+server/以下で API を実装しています。
 
-### インストール
+API は JSON を View とする MVC のような構成をとっています。
 
-このリポジトリをクローンして、以下のコマンドを実行してください。
+#### クライアント関連のディレクトリ
 
-```
-$ npm install
-```
+- pages/
+- components/
+- resources/
+- config/
+- types
 
-### 環境変数
+Next.js はページ単位でコンポーネントを作っていきます。
 
-.env.sample をコピーして、.env ファイルを作成してください。
+pages/配下のコンポーネントはルートと対応しており、今回は 3 ページ(Top, 詳細, 検索)のコンポーネントを用意しています。
 
-### 起動
+pages/配下のコンポーネントは、resources/配下のモジュールで API と通信し、components/配下のコンポーネントで View を構成します。
 
-以下の環境で開発用サーバーが立ち上がります。
+config/, types/は、各モジュールから必要に応じて依存されます。
 
-```
-$ npm run dev
-```
+## 独自機能について
 
-## 独自機能
+独自機能としては、以下の仕様のタブ機能を実装しました。
 
 ### タブ機能
 
@@ -88,3 +97,76 @@ Todo を持ち、かつ全ての Todo が完了している Todo リストを表
 #### 未完了
 
 Todo を持たないまたは、いずれかの ToDo が完了していない ToDo リストのみを表示
+
+## 開発環境
+
+開発環境は、以下の手順に剃ってセットアップしてください。
+
+### 環境要件
+
+- Node.js v.8.11.2
+- Mongodb v.3.6.5
+
+### チェックアウトとインストール
+
+このリポジトリをクローンして、以下のコマンドを実行してください。
+
+```
+$ npm install
+```
+
+### 環境変数
+
+.env.sample をコピーして、.env ファイルを作成してください。
+
+現在の設定項目は以下です。
+
+```
+# server
+PORT=3000                               # サーバーのポート
+NODE_ENV="development"                  # NODE_ENV
+# mongo db
+MONGO_DATABASE=mongodb://localhost/todo # mongodbの接続先
+```
+
+### mongod の起動
+
+アプリケーションを起動する前に、local で mongod を起動しておきます。
+
+この時立ち上げた mongod への接続 URI は、前述の環境変数に設定しておいてください。
+
+```
+$ mongod
+```
+
+mongodb のコレクション等は、アプリケーションが必要に応じて作成します。
+
+もしテストデータが必要であれば、プロジェクトルートにて以下のコマンドを実行してください。
+
+以下のコマンドは mongodb の db 名は、todo だと想定しています。
+
+```
+mongoimport --db todo --collection todos --file ./db/dump/todos.json
+mongoimport --db todo --collection todolists --file ./db/dump/todolists.json
+```
+
+### 起動
+
+以下の環境で開発用サーバーが立ち上がります。
+
+```
+$ npm run dev
+```
+
+以下のように標準出力されていれば完了です。
+
+```
+connected to mongodb
+Ready on http://localhost:3000
+```
+
+## 動作確認用環境
+
+動作確認用環境も用意しました。
+
+アプリケーションは、[Zeit now](https://zeit.co/now)にデプロイしており、MongoDB サーバは[mLab](https://mlab.com/)を利用しています。

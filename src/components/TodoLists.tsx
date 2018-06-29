@@ -12,13 +12,16 @@ interface Props {
 export default ({ todoLists }: Props) => (
   <List>
     {todoLists.map((todoList, i) => (
-      <Link key={i} href={`/detail/${todoList._id}`}>
-        <ListItem>
-          <TodoListName>{todoList.name}</TodoListName>
-          <TodoListState todos={todoList.todos} />
-          <TodoListDue todos={todoList.todos} />
-        </ListItem>
-      </Link>
+      <ListItem>
+        <TodoListName>
+          <Link key={i} href={`/detail/${todoList._id}`}>
+            <a>{todoList.name}</a>
+          </Link>
+        </TodoListName>
+
+        <TodoListState todos={todoList.todos} />
+        <TodoListDue todos={todoList.todos} />
+      </ListItem>
     ))}
   </List>
 );
@@ -37,4 +40,4 @@ const ListItem = styled.li`
   border-radius: 5px;
 `;
 
-const TodoListName = styled.h4``;
+const TodoListName = styled.h3``;

@@ -12,24 +12,26 @@ interface Props {
 export default ({ results }: Props) => (
   <List>
     {results.map((result, i) => (
-      <Link key={i} href={`/detail/${result.todoList._id}`}>
-        <ListItem>
-          <h4>{result.name}</h4>
-          <Info>
-            <Column>
-              <p>リスト: {result.todoList.name}</p>
-            </Column>
-            <Column>
-              <p>
-                期限: <FormatDate date={result.due} />
-              </p>
-              <p>
-                作成日: <FormatDate date={result.createdAt} />
-              </p>
-            </Column>
-          </Info>
-        </ListItem>
-      </Link>
+      <ListItem>
+        <h3>
+          <Link key={i} href={`/detail/${result.todoList._id}`}>
+            <a>{result.name}</a>
+          </Link>
+        </h3>
+        <Info>
+          <Column>
+            <p>リスト: {result.todoList.name}</p>
+          </Column>
+          <Column>
+            <p>
+              期限: <FormatDate date={result.due} />
+            </p>
+            <p>
+              作成日: <FormatDate date={result.createdAt} />
+            </p>
+          </Column>
+        </Info>
+      </ListItem>
     ))}
   </List>
 );

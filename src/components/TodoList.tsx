@@ -18,7 +18,7 @@ export default ({ todos, toggleTodo }: Props) => (
         {todos.map((todo, i) => (
           <ListItem key={i}>
             <TodoInfo>
-              <h4>{todo.name}</h4>
+              <h3>{todo.name}</h3>
               <DateWrapper>
                 期限: <FormatDate date={todo.due} />
               </DateWrapper>

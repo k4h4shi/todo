@@ -34,18 +34,16 @@ export default class TodoListForm extends Component<Props, State> {
   render() {
     const { name } = this.state;
     return (
-      <div>
-        <Form onSubmit={this._handleSubmit}>
-          <Input
-            type="text"
-            name="name"
-            value={name}
-            onChange={this._handleOnChange}
-            placeholder="リスト名を入力してください"
-          />
-          <Button type="submit">リストの作成</Button>
-        </Form>
-      </div>
+      <Form onSubmit={this._handleSubmit}>
+        <Input
+          type="text"
+          name="name"
+          value={name}
+          onChange={this._handleOnChange}
+          placeholder="リスト名を入力してください"
+        />
+        <Button type="submit">リストの作成</Button>
+      </Form>
     );
   }
 }

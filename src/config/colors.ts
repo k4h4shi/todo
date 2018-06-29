@@ -4,5 +4,6 @@ export default {
   green: "#72eaa6",
   black: "#454545",
   grey: "#c8c8c8",
-  lightgrey: "#ccc"
+  lightgrey: "#ccc",
+  default: "#888"
 };

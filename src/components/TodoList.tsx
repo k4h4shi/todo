@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, FormatDate, Message } from "../components";
+import { Button, FormatDate, Message, ListItem } from "../components";
 import { Todo } from "../types";
-import colors from "../config/colors";
 
 interface Props {
   toggleTodo: (string) => void;
@@ -44,15 +43,6 @@ const List = styled.ul`
   display: flex;
   padding: 10px;
   flex-direction: column;
-`;
-
-const ListItem = styled.li`
-  display: flex;
-  list-style: none;
-  margin: 3px;
-  padding: 12px 20px;
-  border: 1px solid ${colors.lightgrey};
-  border-radius: 5px;
 `;
 
 const TodoInfo = styled.div`

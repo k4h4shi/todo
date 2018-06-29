@@ -30,7 +30,7 @@ const Tab = styled(UnstyledTab).attrs({
   padding: 12px 0;
   list-style: none;
   cursor: pointer;
-  color: #888;
+  color: ${colors.default};
   border-left: 1px solid ${colors.lightgrey};
   border-bottom: 1px solid ${colors.lightgrey};
 

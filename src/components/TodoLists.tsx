@@ -1,9 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { TodoListState, TodoListDue } from "../components";
+import { TodoListState, TodoListDue, ListItem } from "../components";
 import { TodoList } from "../types";
-import colors from "../config/colors";
 
 interface Props {
   todoLists: TodoList[];
@@ -12,15 +11,17 @@ interface Props {
 export default ({ todoLists }: Props) => (
   <List>
     {todoLists.map((todoList, i) => (
-      <ListItem>
-        <TodoListName>
-          <Link key={i} href={`/detail/${todoList._id}`}>
-            <a>{todoList.name}</a>
-          </Link>
-        </TodoListName>
+      <ListItem key={i}>
+        <div>
+          <TodoListName>
+            <Link key={i} href={`/detail/${todoList._id}`}>
+              <a>{todoList.name}</a>
+            </Link>
+          </TodoListName>
 
-        <TodoListState todos={todoList.todos} />
-        <TodoListDue todos={todoList.todos} />
+          <TodoListState todos={todoList.todos} />
+          <TodoListDue todos={todoList.todos} />
+        </div>
       </ListItem>
     ))}
   </List>
@@ -30,14 +31,6 @@ const List = styled.ul`
   display: flex;
   padding: 10px;
   flex-direction: column;
-`;
-
-const ListItem = styled.li`
-  list-style: none;
-  margin: 3px;
-  padding: 12px 20px;
-  border: 1px solid ${colors.lightgrey};
-  border-radius: 5px;
 `;
 
 const TodoListName = styled.h3``;
